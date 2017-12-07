@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BdXtudiaWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BdXtudiaWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BdXtudiaWeb.dbo.Applications' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Applications">
@@ -1198,6 +1198,7 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
           <Property Name="MembershipUserName" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="HasLocalPassword" Type="bit" Nullable="false" />
         </EntityType>
+        <Function Name="SelectAllUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BdXtudiaWebModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1910,8 +1911,7 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
     FROM [dbo].[UsersOpenAuthData] AS [UsersOpenAuthData]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BdXtudiaWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3039,7 +3039,17 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
           <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRole" />
           <EntitySet Name="UsersOpenAuthAccounts" EntityType="Self.UsersOpenAuthAccount" />
           <EntitySet Name="UsersOpenAuthDatas" EntityType="Self.UsersOpenAuthData" />
+          <FunctionImport Name="SelectAllUser" ReturnType="Collection(BdXtudiaWebModel.SelectAllUser_Result)" />
         </EntityContainer>
+        <ComplexType Name="SelectAllUser_Result">
+          <Property Type="Int32" Name="IDUsuario" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Nombres" Nullable="false" />
+          <Property Type="String" Name="Apellidos" Nullable="false" />
+          <Property Type="String" Name="Documento" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="EMail" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3896,6 +3906,19 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SelectAllUser" FunctionName="BdXtudiaWebModel.Store.SelectAllUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BdXtudiaWebModel.SelectAllUser_Result">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

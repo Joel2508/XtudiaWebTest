@@ -249,6 +249,9 @@
     <Compile Include="Data\Role.cs">
       <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\SelectAllUser_Result.cs">
+      <DependentUpon>UserModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\sysdiagram.cs">
       <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>

@@ -38,10 +38,10 @@ namespace Domain.CrudModel
             }
         }
 
-        public List<CHE_Usuario>  SelectUser()
+        public List<SelectAllUser_Result>  SelectUser()
         {
             var db = new BdXtudiaWebEntities();
-            var qry = from user in db.CHE_Usuario
+            var qry = from user in db.SelectAllUser()
                       select user;
             return qry.ToList(); 
         }

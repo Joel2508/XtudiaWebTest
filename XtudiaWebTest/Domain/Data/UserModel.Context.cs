@@ -12,6 +12,8 @@ namespace Domain.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BdXtudiaWebEntities : DbContext
     {
@@ -95,5 +97,10 @@ namespace Domain.Data
         public virtual DbSet<UsersInRole> UsersInRoles { get; set; }
         public virtual DbSet<UsersOpenAuthAccount> UsersOpenAuthAccounts { get; set; }
         public virtual DbSet<UsersOpenAuthData> UsersOpenAuthDatas { get; set; }
+    
+        public virtual ObjectResult<SelectAllUser_Result> SelectAllUser()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectAllUser_Result>("SelectAllUser");
+        }
     }
 }
