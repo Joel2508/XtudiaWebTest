@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Domain.Data.CHE_Usuario>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink(" ","CreateUser", new { }, new { @class = "glyphicon glyphicon-plus btn btn-primary" })
+</p>
+
+
+<table class="table">
+    <tfoot>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Documento
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                User Name
+            </th>
+
+        </tr>
+
+    </tfoot>
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Documento
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                User Name
+            </th>
+
+        </tr>
+
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.IDUsuario
+            </td>
+            <td>
+                @item.Nombres
+            </td>
+            <td>
+                @item.Apellidos
+            </td>
+            <td>
+                @item.Documento
+            </td>
+            <td>
+                @item.EMail
+            </td>
+            <td>
+                @item.UserName
+            </td>
+        </tr>
+    }
+</table>
