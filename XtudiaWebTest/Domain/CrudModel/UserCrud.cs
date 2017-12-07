@@ -34,7 +34,6 @@ namespace Domain.CrudModel
                                 ve.PropertyName, ve.ErrorMessage);
                         }
                     }
-                    return e.Message(message);
                 }
             }
         }
