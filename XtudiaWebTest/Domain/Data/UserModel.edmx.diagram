@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="BdXtudiaWebModel.CHE_Chequeo" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BdXtudiaWebModel.CHE_Competidor" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BdXtudiaWebModel.CHE_Producto" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BdXtudiaWebModel.CHE_Usuario" Width="1.5" PointX="6.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BdXtudiaWebModel.CHE_Usuario" Width="1.75" PointX="6.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BdXtudiaWebModel.EPM_Clientes" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BdXtudiaWebModel.EPM_Usuarios" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BdXtudiaWebModel.Membership" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />

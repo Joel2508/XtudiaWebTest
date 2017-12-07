@@ -102,5 +102,38 @@ namespace Domain.Data
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectAllUser_Result>("SelectAllUser");
         }
+    
+        public virtual int InsertUser(Nullable<int> idUsuario, string userName, string nombre, string apellido, string password, string documento, string eMail)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("Apellido", apellido) :
+                new ObjectParameter("Apellido", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var documentoParameter = documento != null ?
+                new ObjectParameter("Documento", documento) :
+                new ObjectParameter("Documento", typeof(string));
+    
+            var eMailParameter = eMail != null ?
+                new ObjectParameter("EMail", eMail) :
+                new ObjectParameter("EMail", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUser", idUsuarioParameter, userNameParameter, nombreParameter, apellidoParameter, passwordParameter, documentoParameter, eMailParameter);
+        }
     }
 }

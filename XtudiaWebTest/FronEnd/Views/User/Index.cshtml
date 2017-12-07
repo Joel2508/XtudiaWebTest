@@ -6,80 +6,61 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink(" ","CreateUser", new { }, new { @class = "glyphicon glyphicon-plus btn btn-primary" })
+    @Html.ActionLink(" ", "CreateUser", new { }, new { @class = "glyphicon glyphicon-plus btn btn-primary" })
 </p>
 
-
 <table class="table">
-    <tfoot>
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Apellido
-            </th>
-            <th>
-                Documento
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                User Name
-            </th>
-
-        </tr>
-
-    </tfoot>
     <thead>
         <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Apellido
-            </th>
-            <th>
-                Documento
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                User Name
-            </th>
-
+            <th style="width:2%;" class="text-center">ID</th>
+            <th style="width:7%;" class="text-center">Nombre</th>
+            <th style="width:7%;" class="text-center">Apellido</th>
+            <th style="width:7%;" class="text-center">Documento</th>
+            <th style="width:7%;" class="text-center">Email</th>
+            <th style="width:2%;" class="text-center">User Name</th>
         </tr>
-
     </thead>
+    <tfoot>
+        <tr>
+            <th style="width:2%;" class="text-center">ID</th>
+            <th style="width:7%;" class="text-center">Nombre</th>
+            <th style="width:7%;" class="text-center">Apellido</th>
+            <th style="width:7%;" class="text-center">Documento</th>
+            <th style="width:7%;" class="text-center">Email</th>
+            <th style="width:2%;" class="text-center">User Name</th>
+        </tr>
+    </tfoot>
+
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+        <tr class="odd gradeX">
+            <td class="text-center">
                 @item.IDUsuario
             </td>
-            <td>
+
+            <td class="text-center">
                 @item.Nombres
             </td>
-            <td>
+            <td class="text-center">
                 @item.Apellidos
             </td>
-            <td>
+            <td class="text-center">
                 @item.Documento
             </td>
-            <td>
+            <td class="text-center">
                 @item.EMail
             </td>
-            <td>
+
+            <td class="text-center">
                 @item.UserName
+            </td>
+
+            <td class="text-right">
+                @Html.ActionLink(" ", "DeleteEvaluacion", new { Id = item.IDUsuario }, new { @title = "Eliminar", @class = "glyphicon glyphicon-trash btn btn-danger", onclick = "return confirm('¿Realmente desea Eliminar esta Evaluación?')" })
+                <a class="btn btn-warning glyphicon glyphicon-pencil" href="@Url.Action("ActializarEvaluaciones", "Evaluacion",new{id=item.IDUsuario, onclick = "return confirm('Realmente desea Eliminar esta Evaluación?')"})">
+                </a>
             </td>
         </tr>
     }
+
 </table>

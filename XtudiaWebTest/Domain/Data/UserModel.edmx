@@ -1198,6 +1198,15 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
           <Property Name="MembershipUserName" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="HasLocalPassword" Type="bit" Nullable="false" />
         </EntityType>
+        <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Apellido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Documento" Type="nvarchar" Mode="In" />
+          <Parameter Name="EMail" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SelectAllUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BdXtudiaWebModelStoreContainer">
           <EntitySet Name="Applications" EntityType="Self.Applications" store:Type="Tables" store:Schema="dbo">
@@ -3040,6 +3049,15 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
           <EntitySet Name="UsersOpenAuthAccounts" EntityType="Self.UsersOpenAuthAccount" />
           <EntitySet Name="UsersOpenAuthDatas" EntityType="Self.UsersOpenAuthData" />
           <FunctionImport Name="SelectAllUser" ReturnType="Collection(BdXtudiaWebModel.SelectAllUser_Result)" />
+          <FunctionImport Name="InsertUser">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Documento" Mode="In" Type="String" />
+            <Parameter Name="EMail" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SelectAllUser_Result">
           <Property Type="Int32" Name="IDUsuario" Nullable="false" />
@@ -3125,6 +3143,11 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
                 <ScalarProperty Name="Documento" ColumnName="Documento" />
                 <ScalarProperty Name="EMail" ColumnName="EMail" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BdXtudiaWebModel.CHE_Usuario">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="BdXtudiaWebModel.Store.SelectAllUser" />
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EPM_Clientes">
@@ -3919,6 +3942,7 @@ warning 6002: The table/view 'BdXtudiaWeb.dbo.UsersOpenAuthData' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="BdXtudiaWebModel.Store.InsertUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

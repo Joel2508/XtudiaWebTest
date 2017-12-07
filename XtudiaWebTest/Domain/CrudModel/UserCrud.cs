@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,26 @@ namespace Domain.CrudModel
             using (var db = new BdXtudiaWebEntities())
             {
                 db.CHE_Usuario.Add(cHE_Usuario);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    var message = string.Empty;
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+
+                        message = string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            message += string.Format("\n- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    return e.Message(message);
+                }
             }
         }
 
@@ -31,19 +51,21 @@ namespace Domain.CrudModel
 
         public void DelelteUser(CHE_Usuario cHE_Usuario)
         {
-            using(var db = new BdXtudiaWebEntities())
+            using (var db = new BdXtudiaWebEntities())
             {
                 db.Entry(cHE_Usuario).State = EntityState.Deleted;
                 db.SaveChanges();
             }
         }
 
-        public List<SelectAllUser_Result>  SelectUser()
+        public List<SelectAllUser_Result> SelectUser()
         {
-            var db = new BdXtudiaWebEntities();
-            var qry = from user in db.SelectAllUser()
-                      select user;
-            return qry.ToList(); 
+            using (var db = new BdXtudiaWebEntities())
+            {
+                var qry = from user in db.SelectAllUser()
+                          select user;
+                return qry.ToList();
+            }
         }
     }
 }
